@@ -10,11 +10,11 @@ install:
 - python -m pip install --upgrade pip
 - pip install pyroma
 - pip install -U setuptools
-- pip install vulture
+# - pip install vulture
 script:
 # - flake8 .
-- pyroma -n 10 .
-- vulture .
+- pyroma .
+# - vulture .
 deploy:
   provider: pypi
   user: Sasha_Chernykh
