@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author: SashaChernykh
 # @Date: 2018-01-22 07:32:05
-# @Last Modified time: 2018-08-26 08:28:27
+# @Last Modified time: 2018-08-26 11:50:38
 """Run tests.
 
 Main file for running Erichek tests.
@@ -30,6 +30,7 @@ from erichek.eric_config import version
 
 # strip colors if stdout is redirected
 # init(strip=not sys.stdout.isatty())
+# Test
 
 
 def main():
