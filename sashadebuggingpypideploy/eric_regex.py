@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author: SashaChernykh
 # @Date: 2018-01-22 19:58:48
-# @Last Modified time: 2018-08-24 08:13:46
+# @Last Modified time: 2018-08-26 18:51:30
 """Regex Checker.
 
 Check, if regexes contains in each line of package for Eric room.
@@ -100,13 +100,6 @@ def eric_all(regex_find, regex_essence):
         regex_essence {str} -- essense, that erichek find
     """
     for final_list in eric_initial_function():
-        # List comprehension, if list item contain regex.
-        # For replacing “for/if/for” with additional variable “find_variable”, example:
-        # for package_line in final_list:
-        #     find_variable = regex.search(regex_find, package_line)
-        #     if not find_variable:
-        #         pyfancy_error("Error")
-        # Lutz, 14.2.3
         entrance_good_list = [
             package_line for package_line in final_list if regex.search(
                 regex_find,

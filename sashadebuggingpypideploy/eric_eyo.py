@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author: SashaChernykh
 # @Date: 2018-08-12 07:52:00
-# @Last Modified time: 2018-08-22 20:23:06
+# @Last Modified time: 2018-08-26 18:51:48
 import _locale
 import delegator
 import erichek.eric_config
@@ -35,11 +35,6 @@ def eric_eyo():
             'eyo --lint --only-safe ' + filename_without_path)
         if eyo_command.return_code == 22:
             pyfancy_error("«ё» replacing needs in " + filename_without_path)
-            # Different commands for Windows and *NIX:
-            # https://www.quora.com/Can-I-run-my-Python-program-in-both-Linux-and-Windows
-            # eyo not support in-place replacing:
-            # https://github.com/hcodes/eyo/issues/15
-            # No built-in cross-platforms tools for file moving.
             if sys.platform == 'Windows':
                 delegator.run(
                     'eyo ' +
