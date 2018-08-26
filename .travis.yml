@@ -3,20 +3,13 @@ python: 3.7
 dist: xenial
 sudo: true
 install:
-# pip upgading required, because otherwise AppVeyor failed, compare:
-# https://ci.appveyor.com/project/Kristinita/erichek/build/1.0.34
-# https://ci.appveyor.com/project/Kristinita/erichek/build/1.0.33
-- python -m pip install --upgrade pip
-- pip install pyroma
-- pip install -U setuptools
+- pip install --upgrade pip
 script:
-- pyroma .
+- python --version
 deploy:
   provider: pypi
   user: Sasha_Chernykh
-  # Needs Enter → Ctrl+Z → Enter:
-  # https://github.com/travis-ci/travis-ci/issues/7327#issuecomment-379517192
   password:
-    secure: Nwm8uaKSecXJXfVzqyE45bPkTjmZUCd83dilypUS5HEeuQUp/Vb/eZrV8pI025iRlZ547L0Tbqby9T1gADX1/Acpmgvvrq7//CiTEjqc0wsvJoZsw8G55Mun8+XBBTc8EJV1HR+Of8+8gsMvdxA4tDljBGYxyqybHRqADJjukgJqNjpqA16N/9Pf+iP0SChUJ1cch+zRcwkHCyMZzOQktn96i7APvyS3VQorn+kFOT+5isu08Cz6sydOKv9kN5XUzMqg3a9w2VmCdGD3zUj4kN6dORaykSqEz+r2D49AcgHVfKVBPC5dTaDItJVd2QW7LDjPtXSRL1O11j1YqEh6QaoNC3g2zH4Tg7o/TNDkvYB2kSQTuRsRPHemdYqrfFJG/3gaNZCE471JmNxJGlZpzv7ea6DFTmDm1zUkBUwmidAQBbp6cgv8zvYMm37fgncjBiUEoFw2M4c0BZaa6XbVfS+wtGIYaM3fambqVTb/pHVgit+po9Mo7M3lkIN7hsKpcC2lyGG3hchd+6TGbyduxTQ263WOqRPf5Coe1X9nvMoP7Jv8saKBlG3qMVxbaIQDJoamAydsObWI5cmLmUrXkwgvJQd2Wds5k8h/JtVAy+aaYmJ501Nbjj2sYG0iS7foyhMsI+GpUCew+nMUWGtQxXkIp8C7a4pN7Ue8RGRUdl8=
+    secure: R2ZygTWCFqsxPBDWZ0YDkTysnFuKNQsc4m6GoQ2KGNOt8/iccMK9Z1hr7BN/qyUhS14L0udzwiC9B0V7hEDZm+ZaR9QSouETcsMhdIZkBDbdXbUUh+02R6VtnjEXYUc9fYdbSfcC9iA0ha5MPodQbnXipv450plgI7SQFttQMbbf6+F//Sz3t/eu2ij5Vfy1wPjuj5Z3cTLJvudQcA9LeoYHY0JkWUpin+wavC0Z0sbXorCIjbI4LDR04ef8CLH3IhMzrBZ9jJzl/ioMcC2FNbA6Fh6GX41BbZdTtOQl8BGkfnEuENgC6x0w0PD9gU59beLfGECDo34G5wniphxXJ+khHbkJW/OAycZYdj8nuaDRnq0EffK8OIzLHUiODsglg1kKSl5DUKjw4jN1WpI6nPEkiunivBzS2NLnZa+SLFHLWM04tUGe0Z1J1glfmtOFoi/0J+Pq0yiMNaliMpw2MgATzxSzOTniNoMajxmKb23jaM0awIuN/sAw4CXeP3aiMhI11XGtzGRWYER1jEV7tRDlgf0P82soQUeJ1h7FWXKyg8/qdZSqn7iAEZdhjxr7hf1ZJcBa0dELH3CMSr4mnEf46/7F7TDxCsXLpCp98XnhXhTSMIBFuKj1+kYzO/g+ANy3MQTCScLzbE2B3NJZ8vVSqzH7a68G2bOKu1MoWQk=
   on:
     branch: SashaPypiDeploy
