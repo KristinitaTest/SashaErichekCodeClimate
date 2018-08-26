@@ -1,0 +1,26 @@
+language: python
+python: 3.7
+dist: xenial
+sudo: true
+install:
+# - pip install flake8
+# pip upgading required, because otherwise AppVeyor failed, compare:
+# https://ci.appveyor.com/project/Kristinita/erichek/build/1.0.34
+# https://ci.appveyor.com/project/Kristinita/erichek/build/1.0.33
+- python -m pip install --upgrade pip
+- pip install pyroma
+- pip install -U setuptools
+- pip install vulture
+script:
+# - flake8 .
+- pyroma -n 10 .
+- vulture .
+deploy:
+  provider: pypi
+  user: Sasha_Chernykh
+  # Needs Enter → Ctrl+Z → Enter:
+  # https://github.com/travis-ci/travis-ci/issues/7327#issuecomment-379517192
+  password:
+    secure: k/sWx/u/ByQbnGK6gZZelaDVeX2KtvOWlloaJS4K3mZabJwuNsx0FadiNk3OvfYgBrnqATDToh4FG3B44jjPVLTwfRd2dHTfHdVMqbqRCGLH+LMaAbtoTZedmj8/sPRa/a9nen/Mw57uGXC2BEMjNCQZYtV8VawtinBsyUkpPFor7EKh6UoaTmmplzQh5K9fCZPdyUNzKlRcjT2NCLY+5SIGjloncLlP1yyYmByfVk+AXZDxRfUtZvAZkJjmnSkRLqZFEZFEmIv0Wp7zuFgX+zzaO6qVKONQJH0OcRa8qjmpKgo1TRXzneIjrBxJNnjl9XZjTpir4AY55WlytdcMHL3sgRrImHK0XCt0Ztt4uLEoc39EOa9XnsU4DpnhGfZm6FkuSg9y5MFzXc0HJb/jzDrk/1T5CPczIjKgkE3ChgOPMEvysEqm6eqpLwFOURcczJJaBxUg8reBEuXaYAimDsMKwalb6DWnN1G3n6GRtgmxvOZfbHL+CeqsyGKKvUnsV9lG7K+mYYw2nvO0pBrF7b6JK88Is/yW/XRQY5qKWzULQJMKx7K1dHRWw5d00y5h2GaVmb9EHMdVA90lnFNQrvhwqxw7pHmOQKiZhb8IPDwgyqNFUfBA/i7gHjTVmQCcKDqQoPiApnX5y98ltngzp7YyKvBQ7tKbTpOZCXU4zBY=
+  on:
+    branch: SashaPypiDeploy

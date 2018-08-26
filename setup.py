@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author: SashaChernykh
 # @Date: 2018-01-22 08:41:23
-# @Last Modified time: 2018-01-22 09:55:37
+# @Last Modified time: 2018-08-03 20:59:37
 """A setuptools based setup module.
 
 See:
@@ -10,12 +10,27 @@ https://github.com/pypa/sampleproject
 """
 
 # Always prefer setuptools over distutils
-from setuptools import setup, find_packages
+# from setuptools import find_packages
+from setuptools import setup
 
-# For Markdown README
-# https://stackoverflow.com/a/26737672/5951529
+# Install dependencies from requirements.txt
+# https://stackoverflow.com/a/49867265/5951529
+# For pip >= 10
+try:
+    from pip._internal.req import parse_requirements
+# For pip <= 9.0.3
+except ImportError:
+    from pip.req import parse_requirements
+
+install_reqs = parse_requirements('requirements.txt', session='hack')
+
+# reqs is a list of requirements
+# e.g. ['django==1.5.1', 'mezzanine==1.4.6']
+reqs = [str(ir.req) for ir in install_reqs]
+
 setup(
-    packages=find_packages(),
+    install_requires=reqs,
+    # packages=find_packages()
     # Although 'package_data' is the preferred approach, in some case you may
     # need to place data files outside of your packages. See:
     # http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files # noqa
