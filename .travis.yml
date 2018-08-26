@@ -3,24 +3,20 @@ python: 3.7
 dist: xenial
 sudo: true
 install:
-# - pip install flake8
 # pip upgading required, because otherwise AppVeyor failed, compare:
 # https://ci.appveyor.com/project/Kristinita/erichek/build/1.0.34
 # https://ci.appveyor.com/project/Kristinita/erichek/build/1.0.33
 - python -m pip install --upgrade pip
 - pip install pyroma
 - pip install -U setuptools
-# - pip install vulture
 script:
-# - flake8 .
 - pyroma .
-# - vulture .
 deploy:
   provider: pypi
   user: Sasha_Chernykh
   # Needs Enter → Ctrl+Z → Enter:
   # https://github.com/travis-ci/travis-ci/issues/7327#issuecomment-379517192
   password:
-    secure: k/sWx/u/ByQbnGK6gZZelaDVeX2KtvOWlloaJS4K3mZabJwuNsx0FadiNk3OvfYgBrnqATDToh4FG3B44jjPVLTwfRd2dHTfHdVMqbqRCGLH+LMaAbtoTZedmj8/sPRa/a9nen/Mw57uGXC2BEMjNCQZYtV8VawtinBsyUkpPFor7EKh6UoaTmmplzQh5K9fCZPdyUNzKlRcjT2NCLY+5SIGjloncLlP1yyYmByfVk+AXZDxRfUtZvAZkJjmnSkRLqZFEZFEmIv0Wp7zuFgX+zzaO6qVKONQJH0OcRa8qjmpKgo1TRXzneIjrBxJNnjl9XZjTpir4AY55WlytdcMHL3sgRrImHK0XCt0Ztt4uLEoc39EOa9XnsU4DpnhGfZm6FkuSg9y5MFzXc0HJb/jzDrk/1T5CPczIjKgkE3ChgOPMEvysEqm6eqpLwFOURcczJJaBxUg8reBEuXaYAimDsMKwalb6DWnN1G3n6GRtgmxvOZfbHL+CeqsyGKKvUnsV9lG7K+mYYw2nvO0pBrF7b6JK88Is/yW/XRQY5qKWzULQJMKx7K1dHRWw5d00y5h2GaVmb9EHMdVA90lnFNQrvhwqxw7pHmOQKiZhb8IPDwgyqNFUfBA/i7gHjTVmQCcKDqQoPiApnX5y98ltngzp7YyKvBQ7tKbTpOZCXU4zBY=
+    secure: Nwm8uaKSecXJXfVzqyE45bPkTjmZUCd83dilypUS5HEeuQUp/Vb/eZrV8pI025iRlZ547L0Tbqby9T1gADX1/Acpmgvvrq7//CiTEjqc0wsvJoZsw8G55Mun8+XBBTc8EJV1HR+Of8+8gsMvdxA4tDljBGYxyqybHRqADJjukgJqNjpqA16N/9Pf+iP0SChUJ1cch+zRcwkHCyMZzOQktn96i7APvyS3VQorn+kFOT+5isu08Cz6sydOKv9kN5XUzMqg3a9w2VmCdGD3zUj4kN6dORaykSqEz+r2D49AcgHVfKVBPC5dTaDItJVd2QW7LDjPtXSRL1O11j1YqEh6QaoNC3g2zH4Tg7o/TNDkvYB2kSQTuRsRPHemdYqrfFJG/3gaNZCE471JmNxJGlZpzv7ea6DFTmDm1zUkBUwmidAQBbp6cgv8zvYMm37fgncjBiUEoFw2M4c0BZaa6XbVfS+wtGIYaM3fambqVTb/pHVgit+po9Mo7M3lkIN7hsKpcC2lyGG3hchd+6TGbyduxTQ263WOqRPf5Coe1X9nvMoP7Jv8saKBlG3qMVxbaIQDJoamAydsObWI5cmLmUrXkwgvJQd2Wds5k8h/JtVAy+aaYmJ501Nbjj2sYG0iS7foyhMsI+GpUCew+nMUWGtQxXkIp8C7a4pN7Ue8RGRUdl8=
   on:
     branch: SashaPypiDeploy
