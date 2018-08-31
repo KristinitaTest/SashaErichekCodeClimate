@@ -1,0 +1,8 @@
+organization=kristinita-github
+projectKey=Kristinita_SashaErichekCodeClimate
+serverUrl=https://sonarcloud.io
+serverVersion=7.4.0.16105
+branch=SashaPypiDeploy
+dashboardUrl=https://sonarcloud.io/dashboard?id=Kristinita_SashaErichekCodeClimate&branch=SashaPypiDeploy
+ceTaskId=AWWO38kPQN8MmxfNECy5
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWWO38kPQN8MmxfNECy5

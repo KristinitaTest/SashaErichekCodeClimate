@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author: Kristinita
 # @Date: 2018-01-02 08:35:59
-# @Last Modified time: 2018-08-26 08:31:58
+# @Last Modified time: 2018-08-30 21:11:45
 # For pydocstyle:
 # D301: Use r""", if any backslashes in a docstring
 r"""Patorjk-HeX ASCII-art font.
@@ -24,20 +24,21 @@ r"""Patorjk-HeX ASCII-art font.
 # Imports and variables for Erichek.
 # I'm create a junction via junction, that works in convenient location:
 # https://superuser.com/a/1020825/572069
-import delegator
 import glob
 import os
-import pkg_resources
 import platform
-import pyperclip
+import sys
 import traceback
 
+import delegator
 # logbook — custom logging:
 # http://logbook.readthedocs.io/en/stable/quickstart.html
 # Set NOTICE level:
 # https://github.com/search?q=StreamHandler(sys.stdout).push_application()&type=Code
 import logbook
-import sys
+import pkg_resources
+import pyperclip
+
 
 # Pyfancy — output color highighting
 # Disabled green background, because bad color in AppVeyor
@@ -47,13 +48,26 @@ import sys
 # Do not use «from <module> import *»
 # http://bit.ly/2CuW5GS
 from pyfancy.pyfancy import pyfancy
-
 from sorcery import switch
 
 # Get all .txt file in a directory
 # https://stackoverflow.com/a/3964689/5951529
 # «glob.glob('../*.txt')» in parent folder, not «glob.glob('../*.txt')»!
 ALL_TXT_IN_ERIC_ROOM_WITHOUT_SUBFOLDERS = glob.glob('./*.txt')
+
+
+def files_loop():
+    """Get list all filenames in a working directory.
+
+    Get list of all filenames and strip paths.
+
+    Yields:
+        list -- filenames in working directory
+
+    """
+    for filename in ALL_TXT_IN_ERIC_ROOM_WITHOUT_SUBFOLDERS:
+        filename_without_path = os.path.basename(filename)
+        yield filename_without_path
 
 
 def version():
@@ -96,13 +110,14 @@ def version():
         '+ Erichek ' + erichek_version + '.'
     )
 
+# [DEPRECATED] Pylint check, that is incorrect function name
+# http://pylint-messages.wikidot.com/messages:c0103
+# def v():
+#     Alternative show version.
 
-def v():
-    """Alternative show version.
+#     For details see: https://github.com/epsy/clize/issues/34
 
-    For details see: https://github.com/epsy/clize/issues/34
-    """
-    version()
+#     version()
 
 
 def logbook_initial(level):
@@ -146,9 +161,38 @@ def eric_logbook_debug():
     """Debug level."""
     logbook_initial(logbook.DEBUG)
 
+# Mypy not support Clize syntax:
+# https://github.com/python/mypy/issues/5541
+# Ignoring in Mypy:
+# https://github.com/python/mypy/issues/500#issuecomment-87460993
 
-def clize_log_level(*, logbook_level: 'll'="NOTICE"):
+
+def clize_log_level(*, logbook_level: 'll' = "NOTICE"):  # type: ignore
     """Change log levels via command line.
+
+    if/elif/else simplified entry:
+    https://ru.stackoverflow.com/a/873470/199934
+
+    :param logbook_level: user select logging level
+    """
+    # Disable specific Pylint rule for block:
+    # https://stackoverflow.com/a/24672552/5951529
+    # Pylint unsupport sorcery switch syntax:
+    # https://github.com/PyCQA/pylint/issues/2450
+    # pylint: disable=E1120
+    switch(logbook_level, lambda: {
+        "DEBUG": eric_logbook_debug(),
+        "INFO": eric_logbook_info(),
+        "ERROR": eric_logbook_error(),
+        "NOTICE": eric_logbook_notice(),
+        "WARNING": eric_logbook_warning(),
+        "CRITICAL": eric_logbook_critical()
+    })
+    # pylint: enable=E1120
+
+
+def logger_function():
+    """Show module names in Logbook description.
 
     Use switch module of sorcery package for replace multiple “if”:
     https://github.com/alexmojaki/sorcery#switch
@@ -161,21 +205,6 @@ def clize_log_level(*, logbook_level: 'll'="NOTICE"):
     elif logbook_level == "INFO":
         logbook.StreamHandler(sys.stdout,
                               level=logbook.INFO).push_application()
-
-    :param logbook_level: user select logging level
-    """
-    switch(logbook_level, lambda: {
-        "DEBUG": eric_logbook_debug(),
-        "INFO": eric_logbook_info(),
-        "ERROR": eric_logbook_error(),
-        "NOTICE": eric_logbook_notice(),
-        "WARNING": eric_logbook_warning(),
-        "CRITICAL": eric_logbook_critical()
-    })
-
-
-def logger_function():
-    """Show module names in Logbook description.
 
     Needs function, not variable, because the value is determined at the time of the call,
     and not the import of the module.
@@ -200,6 +229,10 @@ def pyfancy_function(level_argument, pyfancy_wrapper, pyfancy_variable):
         pyfancy_variable {str} -- logging text
     """
     level_argument(pyfancy_wrapper.add(pyfancy_variable))
+
+# pylint: disable=E1101
+# Pylint unsupport pyfancy syntax:
+# https://github.com/PyCQA/pylint/issues/2448
 
 
 def pyfancy_critical(pyfancy_variable):
@@ -240,6 +273,8 @@ def pyfancy_info(pyfancy_variable):
         logger_function().info,
         pyfancy().light_yellow(),
         pyfancy_variable)
+
+# pylint: enable=E1101
 
 
 def pyfancy_debug(pyfancy_variable):

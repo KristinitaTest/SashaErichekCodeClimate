@@ -2,10 +2,16 @@ language: python
 python: 3.7
 dist: xenial
 sudo: true
+addons:
+  sonarcloud:
+    organization: "kristinita-github"
+    token:
+      secure: l25Sq44wt7NOHXfqlOr7hdS3i4VjP1Anh5INkischOk4TLrvwZMd+8P1e4LqA8cnkTSzaSoQHYNElYVzwKWrWiJnxrHLceXVCw7htzCPHV36Krl/mZogDmuqK9B2rMArqKybHex9i9ncRfL/+R9e8oz0dkNf1ZS48/Qu+kJ4Q2RUEUeVU3/trRJKbCYmmqqk6jC0tyxna5lrnevxkQvw8i3EtUp/lB/zZkI4pyhkBPWkQqoJSK32RTNj1oIkk2O+3LQFTNujnZhsMYNks911ZxbiahPAHpJHZ1JccM6zOzQtd1XsaTkGQCeBcUy6P6ouxigC/HkB681PQ/Sw4kcaR5QrAzxHcG96TrMbi9bZ3w2V+lFfKAc4ytB0Xq3FviHej21pu/tppPpoVZbn9WbkEndtOvqtFy/WG26kYrrA+VMMVam2rajL3myuq46YjIvK2mtuaCTZnNgz3WbPzVv5qUp50uYZOMfkoFKh7J6vXzW1qWW2ubmAaRNFz/wevMh3tkg+VcU94cj1p6Zz6HZFVuhYm7JO2+BwSerJjH+VRDPHkItZWIjN2BOEghZSwUn6V6c+f6PXfEVeYlg9cj+3Bz5e5eOXYSip2936XApcP/sKXBPAwqlBAOLctEgicEU13+ySq/6ljul9J09Kps0bg3PR8iralQAPRBSwSvXGPRY=
 install:
 - pip install --upgrade pip
 script:
 - python --version
+- sonar-scanner
 deploy:
   provider: pypi
   user: Sasha_Chernykh
